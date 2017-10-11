@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <div class="login">
+          <lable>
+              <span>用户名</span>
+              <input type="text" id="user" placeholder="请输入用户名">
+          </lable>
+          <lable>
+              <span>密码</span>
+              <input type="password" id="pwd" placeholder="请输入密码">
+          </lable>
+          <lable>
+              <input type="submit" id="sub">
+          </lable>
+      </div>
+      <script>
+          var submit = document.querySelector('input[type=submit]');
+          var user = document.querySelector('#user');
+          var pwd = document.querySelector('#pwd');
+          submit.onclick=function () {
+              var u=user.value;
+              var p=pwd.value;
+              var xhr=new XMLHttpRequest();
+              xhr.open("POST",'/login');
+              xhr.send(`user=${u}&pwd=${p}`);
+              xhr.onreadystatechange=function () {
+                  if(xhr.readyState==4){
+                      if(xhr.status==200){
+                          var data = xhr.response;
+                          document.write(data);
+                      }
+                  }
+              }
+          }
+      </script>
+</body>
+</html>
